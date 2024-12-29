@@ -1,6 +1,10 @@
 package com.final_project_oop.quiz;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Scanner;
+import java.util.Queue;
+import java.util.NoSuchElementException;
 
 ///   -----------  <Summary> ------------------------------------------------------------------------------------------
 ///
@@ -39,6 +43,7 @@ class MultipleChoice implements Quiz_model{
     private String[] answer_collection;
     private int question_number;
     private boolean isAnswerCorrect;
+    private int Score; 
 
     // Scanner for user input
     Scanner userInput = new Scanner(System.in);
@@ -70,6 +75,10 @@ class MultipleChoice implements Quiz_model{
         return isAnswerCorrect;
     }
 
+    public int getScores(){
+        return this.Score;
+    }
+
 
     // Mutator - -
     public void setQuestion(String question){
@@ -95,8 +104,12 @@ class MultipleChoice implements Quiz_model{
 
     // Multiple Choice Constructor
     // TODO: Implement an overload
-    public MultipleChoice(String question, String correctAnswer, String[] collection ){
-        
+    public MultipleChoice(String question, String correctAnswer, String[] collection, int question_number){
+        // Pass preloaded data
+        this.question = question;
+        this.correctAnswer = correctAnswer;                   
+        this.answer_collection = collection;
+        this.question_number = question_number;
     }
 
     // Use when all mutator methods are invoked
@@ -117,10 +130,10 @@ class MultipleChoice implements Quiz_model{
 
           System.out.println(  // Display
 
-            letter = count == 1? "A" : // Ternary Operation
-            count == 2? "B" : 
-            count == 3? "C" : 
-            count == 4? "D" : "A" +
+            letter = count == 1? "    A. " + answer_collection[count - 1] : // Ternary Operation
+            count == 2? "    B. " + answer_collection[count -1] : 
+            count == 3? "    C. " + answer_collection[count-1]: 
+            count == 4? "    D. " + answer_collection[count-1] : "A" +
             a 
           
           );
@@ -131,6 +144,8 @@ class MultipleChoice implements Quiz_model{
 
        letter = ""; // Reset
        count = 0; // reset
+
+       System.out.println();
        
     }
 
@@ -153,6 +168,16 @@ class MultipleChoice implements Quiz_model{
             System.out.println(
                 "Awww snap... The correct answer is " + correctAnswer + "\n"
             );
+            isAnswerCorrect = false;
+        }
+
+        else{
+
+
+            System.out.println( // Message
+                "   Correct, the answer is"  + correctAnswer + "\n\n"
+            ); 
+            isAnswerCorrect = true; 
         }
     }
 
@@ -163,7 +188,7 @@ class MultipleChoice implements Quiz_model{
         char userInputOnActivity = ' ';
         boolean isUserInputCorrect = false; // To avoid null reference exception
 
-        displayChoices();
+        displayQuestion();
         System.out.println(); // space
         displayChoices();
 
@@ -172,21 +197,32 @@ class MultipleChoice implements Quiz_model{
         );
 
         
-
+        // Collection of valid answer
+       
+        Queue<Character> b = new LinkedList<>();
+        b.add('a');
+        b.add('b');
+        b.add('c');
+        b.add('d');
+        
+        
 
         // Loop until the user inputs the correct answer
         while(isUserInputCorrect != true){
-            System.out.print("Answer >>");
+            System.out.print("------\n "+"Answer >> ");
             try{ 
 
-                userInputOnActivity = userInput.next().charAt(0); // Assign value
+                userInputOnActivity = Character.toLowerCase( userInput.next().charAt(0)); // Assign value
+                if(b.contains(userInputOnActivity)){} else {throw new Exception("WrongInputException");};
+                isUserInputCorrect = true;
 
             }
             catch(Exception ex) {
     
-                System.out.println("!! ----- Wrong input ------ !! --|| Please enter the valid character || ------");
+                System.out.println("!! ----- Wrong input ------ !! --|| Please enter the valid character || ------\n ");
+              
             }
-
+            System.out.println();
         }
 
         // Interpret the user input
@@ -212,6 +248,7 @@ class Identification implements Quiz_model{
     private String correctAnswer;
     private int question_number; 
     private boolean isAnswerCorrect;
+    private int Score;
 
     // Local Properties without mutators and accessors
     private String userAnswer;
@@ -237,6 +274,10 @@ class Identification implements Quiz_model{
     public boolean get_isAnswerCorrect(){
         return isAnswerCorrect;
     }
+    
+    public int getScores(){
+        return this.Score; 
+    }
 
 
     // Mutator - - 
@@ -254,7 +295,12 @@ class Identification implements Quiz_model{
 
 
     // Constructors
-    public Identification(String question, String correctAnswer, String[] collection ){
+    public Identification(String question, String correctAnswer, int question_number ){
+
+        // Assign new values
+        this.question = question;
+        this.correctAnswer = correctAnswer;
+        this.question_number = question_number;
         
     }
  
@@ -276,8 +322,8 @@ class Identification implements Quiz_model{
 
     @Override
     public void displayQuestion(){
-        System.out.println( "==== Qustion:" +question_number+" ===================================================================\n\n" +
-        question);
+        System.out.println( "\u001b[93m==== Qustion:" +question_number+" ===================================================================\u001b[0m\n\n" 
+        + "\u001b[1m" + question + "\u001b[0m");
 
 
     }
@@ -285,22 +331,29 @@ class Identification implements Quiz_model{
     @Override
     public void ValidateAnswer(){
 
+        userAnswer = userAnswer.trim(); // trim trailing white spaces
         isAnswerCorrect = userAnswer.equalsIgnoreCase(correctAnswer);
 
         // display the correct answer if the user input the incorrect answer
         if(isAnswerCorrect == false){
 
             System.out.println(
-                "Awww snap... The correct answer is " + correctAnswer + "\n"
+                "        \u001b[91mAwww snap... The correct answer is  \u001b[31m \u001b[3m  " + correctAnswer + "\u001b[0m\n"
             );
+            isAnswerCorrect = false;
         }
-        
+        else{
+            System.out.println(
+                "         \u001b[94mCorrect.. The right answer is   \u001b[3m \u001b[34m" + correctAnswer + "\u001b[0m \n"
+            );
+            isAnswerCorrect = true;
+        }
     }
 
     @Override
     public void MainActivity(){
          // char value of the correct answer
-         String userInputOnActivity = "";
+         String userInputOnActivity = "" ;
          boolean isUserInputCorrect = false; // To avoid null reference exception
  
          // Display the question for the user 
@@ -312,23 +365,25 @@ class Identification implements Quiz_model{
              System.out.print("Answer >>");
              try{ 
                 
-                 userInputOnActivity = userInput.nextLine().toLowerCase();
+                 userInputOnActivity = userInput.nextLine();
                  isUserInputCorrect = true; 
-                
+
              }
              catch(Exception ex) {
      
-                 System.out.println("!! ----- Wrong input ------ !! --|| Please enter the valid character || ------");
+                 System.out.println("!! ----- Wrong input ------ !! --|| Please enter the valid character || ------ " + ex.getMessage());
+                 isAnswerCorrect = false;
 
              }
-
          }
 
-         userInput.close();  // Close the instance of the scanner class for the Java Garbage Collector to get rid of excess memory usage
+          // Close the instance of the scanner class for the Java Garbage Collector to get rid of excess memory usage
          isUserInputCorrect = false; // Reset the property for the next use
 
          // Pass the local property to the global property in the class
          userAnswer = userInputOnActivity;
+
+         System.out.println(); // space
 
          // validate the answer 
          ValidateAnswer();
