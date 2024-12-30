@@ -16,4 +16,6 @@ public class quiz_collection {
     public static void AddQuiz(QuizActivity quiz){
         quizCollection.add(quiz);
     }
+
+    
 }

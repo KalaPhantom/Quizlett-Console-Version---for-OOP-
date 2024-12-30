@@ -12,6 +12,7 @@ package com.final_project_oop;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import com.final_project_oop.quiz.QuizMainFunction;
 import com.final_project_oop.quiz.Template_quiz;
 import com.final_project_oop.quiz.quiz_collection;
 
@@ -31,6 +32,8 @@ public class Main {
 
         // Invoke the tile here 
         DisplayTitle(); 
+
+        boolean isUserInteracting = true; // Updates when the user chooses exit
      
 
         // TODO: Implement this RGB color scapes
@@ -43,7 +46,38 @@ public class Main {
         // System.out.println(quiz_collection.quizCollection.get(1).getQuizID() + "   >>QUIZ ID - - - - - ");
         // quiz_collection.quizCollection.get(1).PlayQuiz();
 
-        int sample = InitializeNavigator();
+
+        /// Main activity interaction 
+        /// This will keeps the application running until the user select the exit in the selection
+        while (isUserInteracting) {
+
+            int sample = InitializeNavigator();
+            
+            switch (sample) {
+                // Call methods here
+                case 1:
+                QuizMainFunction.DisplayAndSelectQuestion();
+                    break; 
+                
+                case 2: 
+                    break;
+                
+                case 3:
+                    break;
+                
+                case 4: 
+                    isUserInteracting = false; // break the loop 
+                    break;
+            
+                default:
+                    break;
+            }
+            
+        }
+
+      
+
+
 
 
     }
@@ -55,6 +89,12 @@ public class Main {
     public static int InitializeNavigator(){
 
         ClearConsole(); 
+
+
+    
+        // Initialize questions
+        Template_quiz.HistoryMultipleChoice();
+        Template_quiz.Identification();
         
         // -- Local method variables
         int currentSelected = 1; 
@@ -71,6 +111,7 @@ public class Main {
                 System.out.print("\u001b[H\u001b[2J");  
                 System.out.flush(); // Clear the console
 
+
                 ClearConsole();// Clear
 
                 UpdateCue(currentSelected);
@@ -78,9 +119,7 @@ public class Main {
                 if(isWritingRepeat == false ){
                     // User input
                     System.out.print("\n Input the corresponding number choices [from 1 - 4] >> \n");
-                    input = scn.nextInt();
-                
-
+                    input = Integer.parseInt(scn.nextLine());
                 }
                 
                 System.out.println(); // space
@@ -96,35 +135,36 @@ public class Main {
                     currentSelected = input; // Update 
 
                     UpdateCue(currentSelected);
-                    System.out.println("\n >>   Press enter to continue to the selection - or input another range - -    << \n ");;
-                    //scn.nextLine();  // Override 
-                    
-                    scn.nextLine() ;
-                    // Pass new input
-                    String newInput = scn.nextLine();
+                    System.out.println("\n >>   Press \"Y\" or \"y\" to continue to the selection - or input another range - -    << \n ");;
+              
 
+                    // read additional 
+                    String newInput = scn.next().toString().trim();
 
                     // validate new input
-                    if(newInput == null || newInput.isEmpty()) {
+                    if(newInput.equalsIgnoreCase("y")) {
+
                         isNavigatorRunning  = false; 
                     }
                     else{
 
                         int tempInt = Integer.parseInt(newInput);
-                        if(input < 4 || input > 0){isNavigatorRunning = true; input = tempInt;  isWritingRepeat = true; }else {throw new InputMismatchException("Wrong input format"); }
+                        if(tempInt < 4 && tempInt > 0){
+                            isNavigatorRunning = true; input = tempInt;  isWritingRepeat = true; }
+                        else {throw new InputMismatchException("Wrong input format"); } // throw new exception
                     }
 
-                   
-                    
                 }
 
             }
             catch (Exception e) {
+
+                Scanner SCN2 = new Scanner(System.in);
                     
                 // * Input mismatch
                 System.out.println(" - -  !! Input Mismatch !! - -  < Input must be on the range of 1 - 4 , and must never contain letters > - - - - \n       << Press Enter to Continue >> "); 
-                scn.nextLine();
-        
+                SCN2.nextLine();
+
                 // reset input 
                 currentSelected = 1; 
                 input = 1;
@@ -167,7 +207,7 @@ public class Main {
         
     }
 
-    public static void ClearConsole(){
+    public static  void ClearConsole(){
           // Clear the console
           System.out.print("\u001b[H\u001b[2J");  
           System.out.flush(); // Clear the console

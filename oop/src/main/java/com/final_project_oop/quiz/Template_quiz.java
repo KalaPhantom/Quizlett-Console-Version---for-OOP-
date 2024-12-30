@@ -65,7 +65,7 @@ public class Template_quiz {
         // Create the instance of the object
         QuizActivity historyOfComputing = new QuizActivity();
             historyOfComputing.setQuizName("History of computing");
-            historyOfComputing.setQuizID(100);
+            historyOfComputing.setQuizID(101);
             historyOfComputing.setQuizSubj("History ");
             historyOfComputing.setType("MC"); 
 
