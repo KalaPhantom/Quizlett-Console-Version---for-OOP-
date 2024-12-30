@@ -30,7 +30,7 @@ public class Template_quiz {
             questions.add(new MultipleChoice(
                 "Whats your name?", 
                 "Allen",
-                new String[]{"Sample", "Sample", "Sample" , "Sample"},
+                new String[]{"Allen", "Sample", "Sample" , "Sample"},
                 1
             ));
 
@@ -46,8 +46,8 @@ public class Template_quiz {
             questions.add(new MultipleChoice(
                 "What of the person who is known as the 1st editor of La Solaridad?", 
                 "Graciano Lopez Jaena",
-                new String[]{"Graciano Lopez Jaena", "Jose Rizal", "Paciano Lopez" , "Juan Ponce Inrile"},
-                2
+                new String[]{"Graciano Lopez Jaena", "Jose Rizal", "Paciano Lopez" , "Juan Ponce Enrile"},
+                3
             ));
 
             // Intance the list
@@ -56,7 +56,6 @@ public class Template_quiz {
             // Add the base class
             quiz_collection.quizCollection.add(history);
         
-
 
     }
 

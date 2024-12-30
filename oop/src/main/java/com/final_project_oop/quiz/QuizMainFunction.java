@@ -1,5 +1,7 @@
 package com.final_project_oop.quiz;
 
+import java.io.Console;
+import java.security.DrbgParameters.Reseed;
 import java.util.Scanner;
 
 /// Read and Display files files
@@ -8,20 +10,41 @@ import java.util.Scanner;
 /// At end - Store some scores
 /// 
 
-public class QuizMainFunction {
+public class QuizMainFunction extends Quiz_Console_Base {
+
+    /// ------------------------------------------------------
+    /// play the selected quiz base on an index
+    /// 
+    /// ------------------------------------------------------
+    
+    public static void PlaySelectedQuiz(){
+
+        // calls the Display Selection interface method 
+        int indexOfSelectedQuiz = DisplayAndSelectQuestion(); // return int
+
+        if(indexOfSelectedQuiz < 0){
+            // Do nothing
+            // Return
+        }
+        else{
+            // retreives the data from the quiz collection
+            quiz_collection.quizCollection.get(indexOfSelectedQuiz).PlayQuiz();;
+        }
+        
 
 
-    // should have a return value
-    public static void DisplayAndSelectQuestion(){
+    }
+
+
+
+    /// <Summary>
+    /// returns the selected index of a quiz base on the selected item in the console interfaces
+    public static int DisplayAndSelectQuestion(){
 
         // Create the instance of the scanner
         Scanner scn =  new Scanner(System.in);
 
         ClearConsole(); 
-     
-
-        // TODO -- implement a decorator
-        System.out.println("\n============================== Quiz List ==========================================\n\n");
 
         // Create an itterator loop that will display the quizzes stored in an array list
         boolean isUserInputCorrect = false;
@@ -33,19 +56,7 @@ public class QuizMainFunction {
             // Local varaibles on the loop bloc
             String userInput = ""; // Must never contain a null value
 
-
-
-        
-            // Loop to display questions 
-            int count = 1;
-            for(QuizActivity quiz : quiz_collection.quizCollection){
-                System.out.println(
-
-                  currentSelected == count?  ">> [" + count + "]" + quiz.getQuizName() + ">>  " + quiz.getQuizSubjeString() + " <<" :
-                                             "[" + count + "]" + quiz.getQuizName() + ">>  " + quiz.getQuizSubjeString() 
-                );
-                count++;
-            }
+            DisplaySelection(currentSelected); // display current selected
 
             System.out.println();// space 
 
@@ -56,8 +67,9 @@ public class QuizMainFunction {
             try{
 
                 // template input
-
                 int templateInput;
+
+                // temporary storage for string
                 String templateInput_onStirng; 
                 
                 System.out.print(" >>  ");
@@ -69,54 +81,80 @@ public class QuizMainFunction {
               
                 System.out.println(); // Space 
 
+                // clear console
                 ClearConsole();
-                System.out.println("- - - -  Type y\\Y to confirm selection or type another range from the collectiom");
 
+                // Display the collection
+                DisplaySelection(currentSelected);
+                System.out.println(BRIGHT_YELLOW);
+                System.out.println("- - - -  Type y\\Y to confirm selection and play the quiz \n- - - -   Type n\\N to exit \n- - - -   or type another range from the collection");
+                System.out.println(RESET);;
                 // Validate the input
                 templateInput_onStirng = scn.next(); // ? -- Reader
-
 
                 if(templateInput_onStirng.equalsIgnoreCase("y")){
                     isUserInputCorrect = true; // Break the loop by assigning a new value of type boolean as true;
                 }
+                else if(templateInput_onStirng.equalsIgnoreCase("n")){
+                    currentSelected = 0;
+                    break;
+                }
                 else{
 
-                
                     templateInput = Integer.parseInt(templateInput_onStirng);
 
                     // validate the input
-
                     // The input must not be less than zero and greater than the size in index of the collection
-                    if(templateInput > currentRange_byIndex || templateInput <= 0){
-                       
+                    if(templateInput > currentRange_byIndex || templateInput <= 0){                       
                         throw new Exception("Out of Range");
                     }
-
                     else{
                         currentSelected = templateInput;
                     }
-                  
                 }
-            
-
-            
             }
-
             catch(Exception e){
 
-                // Repeat the loop
+                // Display wrong input messsage  - - - -
                 System.out.println(" - - -  <!!>---- Wrong Input ---- <!!> - - - \n -- Please try again  - - - \n" + e.getMessage());
                 
-
             }
         }
+
+        return currentSelected -1 ;
     }
     
-    
-    public static void ClearConsole(){
-        // Clear the console
-        System.out.print("\u001b[H\u001b[2J");  
-        System.out.flush(); // Clear the console
-         
+   
+
+    public static void DisplaySelection(int currentSelected){
+
+        ClearConsole();
+
+        // Trailing display for title
+        // TODO -- implement a decorator
+        System.out.println("\n");
+        System.out.println(BG_YELLOW +"============================== Quiz List ==========================================" + RESET);
+        System.out.println("\n\n");
+
+        // Loop to display questions 
+        int count = 1;
+        for(QuizActivity quiz : quiz_collection.quizCollection){
+            System.out.println(
+
+              currentSelected == count? BRIGHT_YELLOW + ">> [" + count + "]" + quiz.getQuizName() + ">>  " + quiz.getQuizSubjeString() + " <<" + RESET:
+                                         "[" + count + "]" + quiz.getQuizName() + ">>  " + quiz.getQuizSubjeString() 
+            );
+            count++;
+        }
+        System.out.println(); // Division
+    }
+
+    // Display all scores and the overall average of scores in all quizes
+    public static void DisplayScoresAndStats(){
+
+
+        // method local properties
+
+
     }
 }

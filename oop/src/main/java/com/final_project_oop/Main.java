@@ -1,18 +1,10 @@
 package com.final_project_oop;
 
-
-// import java.io.BufferedReader;
-// import java.io.IOException;
-// import java.io.InputStreamReader;
-
-
-// Import the local library of the SQL database
-// import java.sql.*;
-// import java.text.NumberFormat.Style;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import com.final_project_oop.quiz.QuizMainFunction;
+import com.final_project_oop.quiz.Quiz_Console_Base;
 import com.final_project_oop.quiz.Template_quiz;
 import com.final_project_oop.quiz.quiz_collection;
 
@@ -20,12 +12,17 @@ import com.final_project_oop.quiz.quiz_collection;
 // Main activity
 
 // Title 
-public class Main {
+public class Main  {
 
 
     public static void main(String[] args) {
 
         ClearConsole();
+
+        // Initialize questions
+        Template_quiz.HistoryMultipleChoice();
+        Template_quiz.Identification();
+        
 
         // Scanner Instance 
         Scanner scn = new Scanner(System.in);
@@ -56,7 +53,7 @@ public class Main {
             switch (sample) {
                 // Call methods here
                 case 1:
-                QuizMainFunction.DisplayAndSelectQuestion();
+                QuizMainFunction.PlaySelectedQuiz();  // TODO - this is temporary
                     break; 
                 
                 case 2: 
@@ -74,12 +71,6 @@ public class Main {
             }
             
         }
-
-      
-
-
-
-
     }
     
     // TODO NOTE: ADDITIONAL METHODS
@@ -88,14 +79,10 @@ public class Main {
     /// It manages the common controls 
     public static int InitializeNavigator(){
 
+        // Clear console
         ClearConsole(); 
-
-
-    
-        // Initialize questions
-        Template_quiz.HistoryMultipleChoice();
-        Template_quiz.Identification();
         
+
         // -- Local method variables
         int currentSelected = 1; 
         boolean isNavigatorRunning = true;
@@ -111,32 +98,41 @@ public class Main {
                 System.out.print("\u001b[H\u001b[2J");  
                 System.out.flush(); // Clear the console
 
+            
+
 
                 ClearConsole();// Clear
+                Quiz_Console_Base.DisplayTitle();
+               
 
                 UpdateCue(currentSelected);
 
                 if(isWritingRepeat == false ){
                     // User input
-                    System.out.print("\n Input the corresponding number choices [from 1 - 4] >> \n");
+                    
+                    System.out.print(Quiz_Console_Base.ORANGE+"\n Input the corresponding number choices [from 1 - 4] >> \n" + Quiz_Console_Base.RESET);
                     input = Integer.parseInt(scn.nextLine());
                 }
                 
                 System.out.println(); // space
 
                 // validate user input
-                if(input > 4 || input <= 0){
+                if(input >= 5 || input <= 0){
                     throw new InputMismatchException("Wrong input format");
                 }
                 else{
 
+                    
                     ClearConsole(); // clear
+                    Quiz_Console_Base.DisplayTitle();
+
                     // TODO  Update functionalities here - - - - - - - - - - - - - - - - - - 
                     currentSelected = input; // Update 
 
                     UpdateCue(currentSelected);
-                    System.out.println("\n >>   Press \"Y\" or \"y\" to continue to the selection - or input another range - -    << \n ");;
-              
+                    System.out.println(Quiz_Console_Base.BG_BLUE);
+                    System.out.println("\n >>   Press \"Y\" or \"y\" to continue to the selection - or input another range - -    << ");;
+                    System.out.print(Quiz_Console_Base.RESET + "\n\n");
 
                     // read additional 
                     String newInput = scn.next().toString().trim();
@@ -149,9 +145,9 @@ public class Main {
                     else{
 
                         int tempInt = Integer.parseInt(newInput);
-                        if(tempInt < 4 && tempInt > 0){
-                            isNavigatorRunning = true; input = tempInt;  isWritingRepeat = true; }
-                        else {throw new InputMismatchException("Wrong input format"); } // throw new exception
+                        if(tempInt <= 4 && tempInt >= 0){
+                            isNavigatorRunning = true; input = tempInt; tempInt = currentSelected;  isWritingRepeat = true; }
+                        else {throw new InputMismatchException(Quiz_Console_Base.RED +"Wrong input format" + Quiz_Console_Base.RESET); } // throw new exception
                     }
 
                 }
@@ -161,16 +157,10 @@ public class Main {
 
                 Scanner SCN2 = new Scanner(System.in);
                     
-                // * Input mismatch
-                System.out.println(" - -  !! Input Mismatch !! - -  < Input must be on the range of 1 - 4 , and must never contain letters > - - - - \n       << Press Enter to Continue >> "); 
+                // * Input mismatch -- 
+                System.out.println(Quiz_Console_Base.RED+" - -  !! Input Mismatch !! - -  < Input must be on the range of 1 - 4 , and must never contain letters > - - - -      ");
+                System.out.println( "      << Press Enter to Continue >>" + Quiz_Console_Base.RESET); 
                 SCN2.nextLine();
-
-                // reset input 
-                currentSelected = 1; 
-                input = 1;
-                InitializeNavigator();
-                break;
-
             }
 
         }
@@ -217,16 +207,19 @@ public class Main {
 
         Scanner scn = new Scanner(System.in);
            // Display the title splash screen . . . . . . . . 
+           System.out.println(Quiz_Console_Base.ORANGE);
            System.out.println("""
-            \u001b[47m\u001b[33m 
+            
             Group 6 ----- . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ...
-            ..#######..##.....##.####.########.########.##.......########.########.########
-            .##.....##.##.....##..##.......##.......##..##.......##..........##.......##...
-            .##.....##.##.....##..##......##.......##...##.......##..........##.......##...
-            .##.....##.##.....##..##.....##.......##....##.......######......##.......##...
-            .##..##.##.##.....##..##....##.......##.....##.......##..........##.......##...
-            .##....##..##.....##..##...##.......##......##.......##..........##.......##...
-            ..#####.##..#######..####.########.########.########.########....##.......##...
+            
+                ██████ ██    ████████████████████     ███████████████████████ 
+                ██    ████    ████   ███    ███ ██     ██        ██      ██    
+                ██    ████    ████  ███    ███  ██     █████     ██      ██    
+                ██ ▄▄ ████    ████ ███    ███   ██     ██        ██      ██    
+                 ██████  ██████ ██████████████████████████████   ██      ██    
+                    ▀▀                                                         
+                                                               
+
             \u001b[0m
                     """);
             
@@ -236,3 +229,5 @@ public class Main {
         //scn.close(); // Close the instance for the garbage collection
     }
 }
+
+
