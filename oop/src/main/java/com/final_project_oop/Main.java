@@ -57,9 +57,11 @@ public class Main  {
                     break; 
                 
                 case 2: 
+                QuizMainFunction.DisplayScoresAndStats();
                     break;
                 
                 case 3:
+                QuizMainFunction.CreateModifyQuiz();
                     break;
                 
                 case 4: 
@@ -187,7 +189,7 @@ public class Main  {
     
         System.out.println(
 
-            currentSelected == 3? "      \u001b[93m>> Create Quiz << \u001b[0m " : "     [3] Create Quiz" 
+            currentSelected == 3? "      \u001b[93m>> Create or Delete Quiz << \u001b[0m " : "     [3] Create or Delete Quiz" 
         );
 
     

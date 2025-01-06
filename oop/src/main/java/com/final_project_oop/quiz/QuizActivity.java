@@ -73,27 +73,30 @@ public class QuizActivity extends Quiz_Console_Base{
 
         ClearConsole(); // clear the contents of the console
 
-        System.out.println();
-        System.out.println(BG_BLUE + "================================= QUIZ ========================================= " + RESET);
-        System.out.println("\n");
-        System.out.println(ORANGE + 
+        
+        Scanner SCN = new Scanner(System.in);
+
+        for(Quiz_model a : question_collection){
+
+            System.out.println();
+            System.out.println(BG_BLUE + "================================= QUIZ ========================================= " + RESET);
+            System.out.println("\n");
+            System.out.println(ORANGE + 
                             "      Quiz Name: " + getQuizName() + "\n" +
                             "      Quiz ID: " + getQuizID() + "\n" +
                             "      Subject: " + getQuizSubjeString() + "\n" +
                             "      Total Items: " + question_collection.size() + "\n" + RESET 
                             );
         
-        System.out.println(BG_BLUE +"=================================================================================" + RESET );
-        System.out.println("\n\n");
+            System.out.println(BG_BLUE +"=================================================================================" + RESET );
+            System.out.println("\n\n");
 
-        Scanner SCN = new Scanner(System.in);
-
-        for(Quiz_model a : question_collection){
             a.MainActivity();
 
             System.out.println();
             System.out.println(BG_BLUE + "   >> Press Enter to Continue <<   " + RESET);
             SCN.nextLine();
+            ClearConsole();
         }
 
         CountScores();
@@ -128,8 +131,8 @@ public class QuizActivity extends Quiz_Console_Base{
         // Acts similar to a switch statement
         System.out.println(
              Average > 70? BRIGHT_BLUE +"        Score:" + Score + "/ " + numberOfQuestion +"    ..... [AVERAGE] : "+ Average + RESET : 
-             Average < 70 && Average < 65? BRIGHT_YELLOW +"        Score:" + Score + "/" + numberOfQuestion +"    ..... [AVERAGE] : "+ Average + RESET:
-             Average < 65 ? BRIGHT_RED +"        Score" + Score + "/" + numberOfQuestion +"    ..... [AVERAGE] : "+ Average + RESET : "NO SCORE"
+             Average < 70 && Average > 50? BRIGHT_YELLOW +"        Score:" + Score + "/" + numberOfQuestion +"    ..... [AVERAGE] : "+ Average + RESET:
+             Average < 50 ? BRIGHT_RED +"        Score" + Score + "/" + numberOfQuestion +"    ..... [AVERAGE] : "+ Average + RESET : "NO SCORE"
         );
 
         System.out.println(BRIGHT_CYAN + ". . . . . . >> Press Enter to Continue << . . . . ."  + RESET );

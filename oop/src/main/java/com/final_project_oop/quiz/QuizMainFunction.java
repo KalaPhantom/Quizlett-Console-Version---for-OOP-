@@ -2,6 +2,7 @@ package com.final_project_oop.quiz;
 
 import java.io.Console;
 import java.security.DrbgParameters.Reseed;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /// Read and Display files files
@@ -30,12 +31,7 @@ public class QuizMainFunction extends Quiz_Console_Base {
             // retreives the data from the quiz collection
             quiz_collection.quizCollection.get(indexOfSelectedQuiz).PlayQuiz();;
         }
-        
-
-
     }
-
-
 
     /// <Summary>
     /// returns the selected index of a quiz base on the selected item in the console interfaces
@@ -152,9 +148,151 @@ public class QuizMainFunction extends Quiz_Console_Base {
     // Display all scores and the overall average of scores in all quizes
     public static void DisplayScoresAndStats(){
 
+        ClearConsole();
 
-        // method local properties
+        System.out.println(BG_BLUE + "=================================== SCORES ===================================="  + RESET);
+        System.out.println("\n");
+
+        ArrayList<Integer> scoreCollection = new ArrayList<>();
+        ArrayList<Integer> AverageCollection = new ArrayList<>();
+
+        for(QuizActivity a : quiz_collection.quizCollection){
+
+            int total_score =0;
+            int AVG = 0;
+            
+            for (Quiz_model b : a.question_collection){
+
+                if(b.GetQuestionState() == true){
+                    total_score++;
+                }
+            }
+
+            AVG = total_score/a.question_collection.size();
 
 
+            // Pass data
+            scoreCollection.add(total_score);
+            AverageCollection.add(AVG);
+
+            // Display data here
+
+            System.out.println(ORANGE + "---|| "+ RESET + a.getQuizName() + ORANGE+ " ||-------|| " + RESET + a.getQuizSubjeString() + ORANGE + " ||-------||  " + RESET+  total_score + ORANGE+ " ||-------||  " + RESET + AVG + " ||---"  );
+
+
+
+        }
+
+        System.out.println("\n\n");
+        System.out.println(">>     Press the enter key to continue     <<");
+        Scanner SCN = new Scanner(System.in);
+        SCN.nextLine();
+
+    }
+
+
+    /// Summary: - - - - - - - - - 
+    /// This method will provide functionalities on Creating objects of type of Quiz Activity -
+    /// - an object to represent each instance of a quiz containing a collection
+    /// 
+
+
+    // Main panel for activity
+    public static void CreateModifyQuiz(){
+
+        // Call the selection method from the base class 
+        int selection = Selection(
+            new String[] {"Create Quiz", "Delete Quiz"},
+            "  Create or delete Quiz-- use the commands below to modify \n  Select choices base on their numbers",
+            "Invalid Input",
+            "Modify or Create Quiz"
+        );
+
+        if(selection == 1){
+            CreateQuiz();
+        }
+        else if (selection == 2){
+            DeleteQuiz();
+        }
+        else{
+            // exit
+        }
+    }
+
+    private static void CreateQuiz(){
+
+        boolean isAdding = true;
+
+        String QuizName;
+        String Subject;
+        int ID;
+        String type;
+
+        // Selection\
+        String[] selection = {"Multiple Choice", "Identification"};
+
+        // Create the instance of selection panel
+        int selected = Selection(selection, 
+        "Type the number of your selected choice then hit the enter key", 
+        "Invalid type input",
+        "Create New Quiz");
+
+        // switch statement as a separator
+        switch (selected) {
+            case 1: // for multiple Choice
+            // Call create here
+            Create_MultipleChoice();
+                break;
+
+            case 2: // for identification
+            // Call create here
+            Create_Identification();
+                break;
+        
+            default:
+                break;
+        }
+    }
+
+    private static void Create_MultipleChoice(){
+
+        // Initialize an interface here
+
+        // count 
+        // quiz title 
+        // quiz id
+
+    }
+
+    private static void Create_Identification(){
+
+        // Initialize an interface here
+
+        // count 
+        // quiz title 
+        // quiz id
+
+        // Question 
+        // Answer
+
+    }
+
+    private static void DeleteQuiz(){
+
+        int selected = Selection(quiz_collection.quizCollection,
+            "Sekect the choices by their numbers and hit the enter key",
+            "Invalid Input",
+            "Delete Quiz");
+
+            if(selected == -1){
+
+            }
+            else{
+                System.out.println( ORANGE + "   " + "The Quiz: " +
+                quiz_collection.quizCollection.remove(selected -1).getQuizName()
+                + " has been removed"
+                );
+
+            }
     }
 }

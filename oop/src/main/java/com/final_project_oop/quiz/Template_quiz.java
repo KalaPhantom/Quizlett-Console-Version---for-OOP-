@@ -66,7 +66,7 @@ public class Template_quiz {
             historyOfComputing.setQuizName("History of computing");
             historyOfComputing.setQuizID(101);
             historyOfComputing.setQuizSubj("History ");
-            historyOfComputing.setType("MC"); 
+            historyOfComputing.setType("ID"); 
 
         
             // Create a temporary Array list collection
