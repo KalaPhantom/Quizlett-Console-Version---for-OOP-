@@ -111,6 +111,7 @@ public class Quiz_Console_Base {
 
 
                 // instructional message
+                System.out.println("\n\n\n"); // Space 
                 System.out.println(BRIGHT_BLUE +"  >>> Select range from 1 to" + range + "  and press the enter key <<<" + RESET);
                 System.out.println(YELLOW +" >> ");
 
@@ -134,6 +135,7 @@ public class Quiz_Console_Base {
                 // Display the header again
                 ClearConsole();
                   // Display the message
+                  
                   System.out.println(BG_GREEN+"============================<" + title + ">==================================" + RESET);
                   System.out.print("\n\n"); // 2x standard spacing
                   System.out.println(ORANGE+"   " + instruction + "  "+RESET);
@@ -264,7 +266,8 @@ public class Quiz_Console_Base {
 
 
                 // instructional message
-                System.out.println(BRIGHT_BLUE +"  >>> Select range from 1 to" + range + "  and press the enter key <<<" + RESET);
+                System.out.println("\n\n\n"); // Space 
+                System.out.println(BRIGHT_BLUE +"  >>> Select range from 1 to " + range + "  and press the enter key <<<" + RESET);
                 System.out.println(YELLOW +" >> ");
 
                 // Disables

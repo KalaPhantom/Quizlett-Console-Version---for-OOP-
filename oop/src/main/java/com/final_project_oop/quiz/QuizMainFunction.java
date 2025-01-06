@@ -2,6 +2,7 @@ package com.final_project_oop.quiz;
 
 import java.io.Console;
 import java.security.DrbgParameters.Reseed;
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -256,24 +257,255 @@ public class QuizMainFunction extends Quiz_Console_Base {
 
     private static void Create_MultipleChoice(){
 
-        // Initialize an interface here
+        // Create the instance 
+        QuizActivity MC =  new QuizActivity();
 
-        // count 
-        // quiz title 
-        // quiz id
+        // Scanner
+        Scanner SCN = new Scanner(System.in);
 
+          // Repeat all attributes each itteration
+          System.out.println(); // space
+          System.out.println(BG_BLUE+ "============================== CREATE MULTIPLE CHOICE ========================================" + RESET); 
+          System.out.println(); // space
+
+          System.out.print(YELLOW + " Enter the name of the quiz:  " + RESET);
+
+          // Reader for quiz name
+          System.out.print(ORANGE);
+          MC.setQuizName(SCN.next().trim());
+          System.out.println(RESET);
+
+          SCN.nextLine(); // Takes the extra line
+          
+
+
+          System.out.print(YELLOW + " Enter the subject of the quiz:  " + RESET);
+
+          // Reead the subject string
+          System.out.print(ORANGE);
+          MC.setQuizSubj(SCN.next().trim());
+          System.out.println(RESET);
+
+          // Set the type
+          MC.setType("MC");
+
+
+
+        boolean isCreating = true;
+        int questionCount = 1;
+
+        ClearConsole();
+
+        // Loop to continually create quizes of type 
+        while(isCreating == true){
+
+            ClearConsole();
+
+
+
+             // Repeat all attributes each itteration
+            System.out.println(); // space
+            System.out.println(BG_BLUE+ "============================== CREATE MULTIPLE CHOICE ========================================" + RESET); 
+            System.out.println(); // space
+
+            System.out.println(
+
+            ORANGE + 
+                "      Name: " + MC.getQuizName() + "\n" +
+                "      Subject: " + MC.getQuizSubjeString() + "\n" +
+                "      Type: " + MC.getType() + "\n" +
+                "      Number of Questions: " + MC.question_collection.size() + "\n" + RESET
+            );
+
+            // Create instance
+            MultipleChoice MC_Q = new MultipleChoice();
+
+            MC_Q.set_question_number(questionCount);
+
+            System.out.println(YELLOW + "==============================Question " + questionCount+"========================================" + RESET);
+            System.out.println(); // space
+
+
+            // reads the question from the user input
+            System.out.println(BLUE + "- - Enter your Question - - ");
+            System.out.print(ORANGE +">> " + YELLOW);
+            MC_Q.setQuestion(SCN.next().trim());
+            System.out.print(RESET);
+
+            SCN.nextLine();// take all trailing space
+
+            // reads the correct answer
+            System.out.println(BLUE + "- - Enter the Correct Answer - - ");
+            System.out.print(ORANGE +">> " + YELLOW);
+            MC_Q.setCorrectAnswer(SCN.next());   
+            System.out.println(RESET);
+
+
+            // reads the correct answer
+            System.out.println(BLUE + "- - Enter the Choices (On range of 1 to 4) - - ");
+            System.out.print(ORANGE +">> \n " + YELLOW);
+
+            // Template Array
+            String[] choicesTemplate = new String[4];
+            String[] letter = {"A","B", "C", "D"};
+
+            for(int i = 0; i < 4 ; i++){
+                System.out.print(BLUE+"    > Option " +letter[i] +":"+ YELLOW);
+                choicesTemplate[i]= SCN.next();
+            }
+
+            // Pass the array to the object
+            MC_Q.setAnswerCollection(choicesTemplate);
+
+            System.out.println(RESET);
+
+            // Add the new question to the base model
+            MC.question_collection.add(MC_Q);
+
+
+            // Validate loop continuity
+            System.out.println(ORANGE+">> Do you want to add new Question Y/n" + YELLOW);;
+            String inputValidation = SCN.next();
+
+            if(inputValidation.equalsIgnoreCase("y")){
+
+                System.out.println(RESET);
+
+            }
+            else{
+
+                System.out.print(YELLOW+"\n <> New Quiz has been added.. Press Enter to Continue . .  <>" + RESET);
+                SCN.nextLine();
+                SCN.nextLine();
+            
+                isCreating = false;
+                quiz_collection.quizCollection.add(MC);
+
+                // Add the new quiz
+                System.out.println(RESET);
+            }
+
+        }
     }
 
     private static void Create_Identification(){
 
         // Initialize an interface here
+        // Create the instance 
+        QuizActivity ID =  new QuizActivity();
 
-        // count 
-        // quiz title 
-        // quiz id
+        // Scanner
+        Scanner SCN = new Scanner(System.in);
 
-        // Question 
-        // Answer
+        // Repeat all attributes each itteration
+        System.out.println(); // space
+        System.out.println(BG_BLUE+ "============================== CREATE IDENTIFICATION QUIZ ========================================" + RESET); 
+        System.out.println(); // space
+
+        System.out.print(YELLOW + " Enter the name of the quiz:  " + RESET);
+
+        // Reader for quiz name
+        System.out.print(ORANGE);
+        ID.setQuizName(SCN.next().trim());
+        System.out.println(RESET);
+
+        SCN.nextLine(); // Takes the extra line
+   
+
+
+        System.out.print(YELLOW + " Enter the subject of the quiz:  " + RESET);
+
+        // Reead the subject string
+        System.out.print(ORANGE);
+         ID.setQuizSubj(SCN.next().trim());
+        System.out.println(RESET);
+
+        // Set the type
+        ID.setType("ID");
+
+
+
+        boolean isCreating = true;
+        int questionCount = 1;
+
+        ClearConsole();
+
+        // Loop to continually create quizes of type 
+         while(isCreating == true){
+
+            ClearConsole();
+
+
+
+            // Repeat all attributes each itteration
+            System.out.println(); // space
+            System.out.println(BG_BLUE+ "============================== CREATE MULTIPLE CHOICE ========================================" + RESET); 
+             System.out.println(); // space
+
+            System.out.println(
+
+                ORANGE + 
+                 "      Name: " + ID.getQuizName() + "\n" +
+                "      Subject: " + ID.getQuizSubjeString() + "\n" +
+                "      Type: " + ID.getType() + "\n" +
+                 "      Number of Questions: " + ID.question_collection.size() + "\n" + RESET
+            );
+
+             // Create instance
+            Identification ID_Q = new Identification() ;
+
+            ID_Q.set_question_number(questionCount);
+
+            System.out.println(YELLOW + "============================== Question " + questionCount+" ========================================" + RESET);
+            System.out.println(); // space
+
+
+            // reads the question from the user input
+            System.out.println(BLUE + "- - Enter your Question - - ");
+            System.out.print(ORANGE +">> " + YELLOW);
+            ID_Q.setQuestion(SCN.next().trim());
+            System.out.print(RESET);
+
+            SCN.nextLine();// take all trailing space
+
+            // reads the correct answer
+             System.out.println(BLUE + "- - Enter the Correct Answer - - ");
+            System.out.print(ORANGE +">> " + YELLOW);
+            ID_Q.setCorrectAnswer(SCN.next());   
+            System.out.println(RESET);
+
+
+          
+        
+            System.out.println(RESET);
+
+            // Add the new question to the base model
+            ID.question_collection.add(ID_Q);
+
+
+            // Validate loop continuity
+            System.out.println(ORANGE+">> Do you want to add new Question Y/n" + YELLOW);;
+            String inputValidation = SCN.next();
+
+             if(inputValidation.equalsIgnoreCase("y")){
+
+                System.out.println(RESET);
+
+             }
+            else{
+
+                System.out.print(YELLOW+"\n <> New Quiz has been added.. Press Enter to Continue . .  <>" + RESET);
+                SCN.nextLine();
+                SCN.nextLine();
+     
+                isCreating = false;
+                quiz_collection.quizCollection.add(ID);
+
+                // Add the new quiz
+                 System.out.println(RESET);
+            }
+
+        }
 
     }
 
@@ -295,4 +527,13 @@ public class QuizMainFunction extends Quiz_Console_Base {
 
             }
     }
+
+    // Display Quiz Attributes
+
+    private static void DisplayQuizAttributes(){
+
+
+    }
+
+
 }

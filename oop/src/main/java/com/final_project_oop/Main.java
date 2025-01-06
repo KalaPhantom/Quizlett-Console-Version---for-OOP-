@@ -8,6 +8,8 @@ import com.final_project_oop.quiz.Quiz_Console_Base;
 import com.final_project_oop.quiz.Template_quiz;
 import com.final_project_oop.quiz.quiz_collection;
 
+import json_methods.JSON_methods;
+
 
 // Main activity
 
@@ -18,6 +20,7 @@ public class Main  {
     public static void main(String[] args) {
 
         ClearConsole();
+        JSON_methods.LoadFromJson();
 
         // Initialize questions
         Template_quiz.HistoryMultipleChoice();
@@ -73,6 +76,8 @@ public class Main  {
             }
             
         }
+
+        JSON_methods.StoreToJson();
     }
     
     // TODO NOTE: ADDITIONAL METHODS

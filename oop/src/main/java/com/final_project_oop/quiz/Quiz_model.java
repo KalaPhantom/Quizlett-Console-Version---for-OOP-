@@ -48,7 +48,7 @@ class MultipleChoice implements Quiz_model{
     private int Score; 
 
     // Scanner for user input
-    Scanner userInput = new Scanner(System.in);
+    transient Scanner userInput = new Scanner(System.in);
 
     // Local Properties without mutators and accessors
     private String userAnswer;
@@ -270,7 +270,7 @@ class Identification implements Quiz_model{
     private String userAnswer;
 
     // Initialize Scanner Here
-    Scanner userInput = new Scanner(System.in);
+    transient Scanner userInput = new Scanner(System.in);
      
     // Accessor - - 
     public String getQuestion(){
