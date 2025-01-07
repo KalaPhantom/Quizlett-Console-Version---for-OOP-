@@ -1,0 +1,123 @@
+[ {
+  "question_collection" : [ {
+    "type" : "Identification",
+    "question" : "Sample Question",
+    "correctAnswer" : "Sample Answer",
+    "scores" : 0,
+    "_question_number" : 1,
+    "_isAnswerCorrect" : false
+  }, {
+    "type" : "Identification",
+    "question" : "Sample Question",
+    "correctAnswer" : "Sample Answer",
+    "scores" : 0,
+    "_question_number" : 2,
+    "_isAnswerCorrect" : false
+  }, {
+    "type" : "Identification",
+    "question" : "Sample Question",
+    "correctAnswer" : "Sample Answer",
+    "scores" : 0,
+    "_question_number" : 3,
+    "_isAnswerCorrect" : false
+  }, {
+    "type" : "Identification",
+    "question" : "Sample Question",
+    "correctAnswer" : "Sample Answer",
+    "scores" : 0,
+    "_question_number" : 4,
+    "_isAnswerCorrect" : false
+  } ],
+  "type" : "ID",
+  "quizID" : 101,
+  "scores" : 0,
+  "quizName" : "History of computing",
+  "quizSubject" : "History "
+}, {
+  "question_collection" : [ {
+    "type" : "MultipleChoice",
+    "question" : "Whats your name?",
+    "correctAnswer" : "Allen",
+    "scores" : 0,
+    "_question_number" : 1,
+    "_isAnswerCorrect" : true,
+    "answerCollection" : [ "Allen", "Sample", "Sample", "Sample" ]
+  }, {
+    "type" : "MultipleChoice",
+    "question" : "What of the person who is known as the 1st editor of La Solaridad?",
+    "correctAnswer" : "Graciano Lopez Jaena",
+    "scores" : 0,
+    "_question_number" : 2,
+    "_isAnswerCorrect" : true,
+    "answerCollection" : [ "Graciano Lopez Jaena", "Jose Rizal", "Paciano Lopez", "Juan Ponce Inrile" ]
+  }, {
+    "type" : "MultipleChoice",
+    "question" : "What of the person who is known as the 1st editor of La Solaridad?",
+    "correctAnswer" : "Graciano Lopez Jaena",
+    "scores" : 0,
+    "_question_number" : 3,
+    "_isAnswerCorrect" : true,
+    "answerCollection" : [ "Graciano Lopez Jaena", "Jose Rizal", "Paciano Lopez", "Juan Ponce Enrile" ]
+  } ],
+  "type" : "MC",
+  "quizID" : 100,
+  "scores" : 3,
+  "quizName" : "General History of the Philippines",
+  "quizSubject" : "History "
+}, {
+  "question_collection" : [ {
+    "type" : "Identification",
+    "question" : "Sample Question",
+    "correctAnswer" : "Sample Answer",
+    "scores" : 0,
+    "_question_number" : 1,
+    "_isAnswerCorrect" : false
+  }, {
+    "type" : "Identification",
+    "question" : "Sample Question",
+    "correctAnswer" : "Sample Answer",
+    "scores" : 0,
+    "_question_number" : 2,
+    "_isAnswerCorrect" : false
+  }, {
+    "type" : "Identification",
+    "question" : "Sample Question",
+    "correctAnswer" : "Sample Answer",
+    "scores" : 0,
+    "_question_number" : 3,
+    "_isAnswerCorrect" : false
+  }, {
+    "type" : "Identification",
+    "question" : "Sample Question",
+    "correctAnswer" : "Sample Answer",
+    "scores" : 0,
+    "_question_number" : 4,
+    "_isAnswerCorrect" : false
+  } ],
+  "type" : "ID",
+  "quizID" : 101,
+  "scores" : 0,
+  "quizName" : "History of computing",
+  "quizSubject" : "History "
+}, {
+  "question_collection" : [ {
+    "type" : "Identification",
+    "question" : "1",
+    "correctAnswer" : "2",
+    "scores" : 0,
+    "_question_number" : 1,
+    "_isAnswerCorrect" : false
+  }, {
+    "type" : "Identification",
+    "question" : "232\"345",
+    "correctAnswer" : "dflm",
+    "scores" : 0,
+    "_question_number" : 1,
+    "_isAnswerCorrect" : false
+  } ],
+  "type" : "ID",
+  "quizID" : 0,
+  "scores" : 0,
+  "quizName" : "Math",
+  "quizSubject" : "Math"
+} ]

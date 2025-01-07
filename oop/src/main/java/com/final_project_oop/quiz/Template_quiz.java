@@ -21,7 +21,7 @@ public class Template_quiz {
         QuizActivity history = new QuizActivity();
             history.setQuizName("General History of the Philippines");
             history.setQuizID(100);
-            history.setQuizSubj("History ");
+            history.setQuizSubject("History ");
             history.setType("MC"); // Multiple Choice
         
         ArrayList<Quiz_model> questions = new ArrayList<Quiz_model>();
@@ -65,7 +65,7 @@ public class Template_quiz {
         QuizActivity historyOfComputing = new QuizActivity();
             historyOfComputing.setQuizName("History of computing");
             historyOfComputing.setQuizID(101);
-            historyOfComputing.setQuizSubj("History ");
+            historyOfComputing.setQuizSubject("History ");
             historyOfComputing.setType("ID"); 
 
         

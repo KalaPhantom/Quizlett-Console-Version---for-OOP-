@@ -4,6 +4,8 @@ import java.security.DrbgParameters.Reseed;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /// <Summary Note> ------------------------------------------------------
 /// 
 ///  This will serve as the base class of the quiz
@@ -16,14 +18,19 @@ import java.util.Scanner;
 /// 
 /// </Summary Note> ------------------------------------------------------
 
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class QuizActivity extends Quiz_Console_Base{
 
     private String QuizName; 
     private String QuizSubject;
-    private String type;
+    private String Quiztype;
     private int QuizID;
     private int Scores; // Must be declared as read only 
+
+    // Constructor
+    public QuizActivity(){
+
+    }
 
     // Accessor methods
     public String getQuizName(){
@@ -31,7 +38,7 @@ public class QuizActivity extends Quiz_Console_Base{
         return this.QuizName;
     }
 
-    public String getQuizSubjeString(){
+    public String getQuizSubject(){
 
         return this.QuizSubject;
     }
@@ -41,10 +48,10 @@ public class QuizActivity extends Quiz_Console_Base{
     }
 
     public String getType(){
-        return this.type;
+        return this.Quiztype;
     }
 
-    public int getScore(){
+    public int getScores(){
         return this.Scores;
     }
 
@@ -54,7 +61,7 @@ public class QuizActivity extends Quiz_Console_Base{
         this.QuizName = QuizName;
     }
 
-    public void setQuizSubj (String QuizSubject){
+    public void setQuizSubject (String QuizSubject){
         this.QuizSubject = QuizSubject;
     }
 
@@ -63,8 +70,13 @@ public class QuizActivity extends Quiz_Console_Base{
     }
 
     public void setType (String type){
-        this.type = type; 
+        this.Quiztype = type; 
     }
+
+    public void setScores(int scores) {
+        this.Scores = scores;
+    }
+
 
     // Collection of all questions
     public ArrayList<Quiz_model> question_collection = new ArrayList<Quiz_model>();
@@ -84,7 +96,7 @@ public class QuizActivity extends Quiz_Console_Base{
             System.out.println(ORANGE + 
                             "      Quiz Name: " + getQuizName() + "\n" +
                             "      Quiz ID: " + getQuizID() + "\n" +
-                            "      Subject: " + getQuizSubjeString() + "\n" +
+                            "      Subject: " + getQuizSubject() + "\n" +
                             "      Total Items: " + question_collection.size() + "\n" + RESET 
                             );
         
@@ -121,6 +133,12 @@ public class QuizActivity extends Quiz_Console_Base{
                 Score++;
             }
         }
+
+        this.Scores = Score;
+
+        
+
+
 
         // Display the header
         System.out.println(BRIGHT_YELLOW +"     >> YOUR SCORE << \n\n" + RESET );

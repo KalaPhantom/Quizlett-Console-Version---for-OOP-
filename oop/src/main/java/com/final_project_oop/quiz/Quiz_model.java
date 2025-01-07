@@ -3,8 +3,13 @@ package com.final_project_oop.quiz;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
+
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import java.util.Queue;
 import java.util.NoSuchElementException;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 ///   -----------  <Summary> ------------------------------------------------------------------------------------------
 ///
@@ -23,7 +28,19 @@ import java.util.NoSuchElementException;
 
 
 // Base interface as the framework
-public interface Quiz_model{
+
+
+
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME, // Use type names to identify the concrete class
+    include = JsonTypeInfo.As.PROPERTY, // Include type info as a property in the JSON
+    property = "type" // The property name where type info will be stored (e.g., "type": "multiple_choice")
+)
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = MultipleChoice.class, name = "MultipleChoice"),
+    @JsonSubTypes.Type(value = Identification.class, name = "Identification")
+})
+public interface Quiz_model{ // ! abstraction
 
     public void displayQuestion();
     public void displayChoices();
@@ -35,6 +52,7 @@ public interface Quiz_model{
 }
 
 /// Multiple Choice type
+@JsonIgnoreProperties(ignoreUnknown = true)
 class MultipleChoice implements Quiz_model{
 
 
@@ -257,6 +275,7 @@ class MultipleChoice implements Quiz_model{
 
 
 /// Identification
+@JsonIgnoreProperties(ignoreUnknown = true)
 class Identification implements Quiz_model{
 
 

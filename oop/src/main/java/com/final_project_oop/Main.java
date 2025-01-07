@@ -20,11 +20,21 @@ public class Main  {
     public static void main(String[] args) {
 
         ClearConsole();
-        JSON_methods.LoadFromJson();
 
+        try {
+            // Call SerializeOnJson method from JSON_methods class
+            JSON_methods.deserialize();
+        } catch (Exception e) {
+            // Handle the exception here
+            System.out.println("An error occurred: " + e.getMessage());
+            e.printStackTrace(); // Print the full stack trace
+        }
+
+
+        // Template Quizzes
         // Initialize questions
-        Template_quiz.HistoryMultipleChoice();
-        Template_quiz.Identification();
+        //Template_quiz.HistoryMultipleChoice();
+        //Template_quiz.Identification();
         
 
         // Scanner Instance 
@@ -77,7 +87,17 @@ public class Main  {
             
         }
 
-        JSON_methods.StoreToJson();
+        try {
+            // Call SerializeOnJson method from JSON_methods class
+            JSON_methods.SerializeOnJson();
+        } catch (Exception e) {
+            // Handle the exception here
+            System.out.println("An error occurred: " + e.getMessage());
+            e.printStackTrace(); // Print the full stack trace
+        }
+     
+
+      
     }
     
     // TODO NOTE: ADDITIONAL METHODS

@@ -1,56 +1,55 @@
 package json_methods;
 
 import com.final_project_oop.quiz.QuizActivity;
+import com.final_project_oop.quiz.Quiz_model;
 import com.final_project_oop.quiz.quiz_collection;
-import com.google.gson.Gson;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
+
+
 
 public class JSON_methods {
 
+    public static void SerializeOnJson() throws Exception{
 
+        File file = new File("quizCollection.json");
 
-    public static void StoreToJson() {
-        String fileName = "QuizData.json";
-        Gson gson = new Gson();
-    
-        try (FileWriter writer = new FileWriter(fileName)) {
-            // Serialize the entire quiz collection to JSON
-            gson.toJson(quiz_collection.quizCollection, writer);
-            System.out.println("JSON stored in " + fileName);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+
+        objectMapper.writeValue(file, quiz_collection.quizCollection);
+
+        // Serialize the Quiz object to JSON
+        //String json = objectMapper.writeValueAsString(quiz_collection.quizCollection);
+        
     }
 
-    public static void LoadFromJson() {
-        String fileName = "QuizData.json";
-        Gson gson = new Gson();
 
-        try (FileReader reader = new FileReader(fileName)) {
-            // Deserialize JSON into a collection of QuizActivity objects
-            QuizActivity[] activities = gson.fromJson(reader, QuizActivity[].class);
-            quiz_collection.quizCollection = new ArrayList<>(Arrays.asList(activities));
+    public static void deserialize() throws IOException{
 
-            if (new File(fileName).length() == 0) {
-                 System.out.println("File is empty. No data to load.");
-                 return;
-            }
+         // Create an ObjectMapper instance
+         ObjectMapper objectMapper = new ObjectMapper();
 
-            System.out.println("JSON loaded successfully.");
-            
-        } catch (IOException e) {
+         // Specify the file to read from
+         File file = new File("quizCollection.json");
 
-            e.printStackTrace();
+        quiz_collection.quizCollection = objectMapper.readValue(file, new TypeReference<ArrayList<QuizActivity>>() {});
 
-        }
+        
     }
+
+
+  
 
 
 }
+
+
+

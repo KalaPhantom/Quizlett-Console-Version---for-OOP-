@@ -19,7 +19,7 @@ public class QuizMainFunction extends Quiz_Console_Base {
     /// 
     /// ------------------------------------------------------
     
-    public static void PlaySelectedQuiz(){
+    public static void PlaySelectedQuiz(){ // ! ---
 
         // calls the Display Selection interface method 
         int indexOfSelectedQuiz = DisplayAndSelectQuestion(); // return int
@@ -123,7 +123,7 @@ public class QuizMainFunction extends Quiz_Console_Base {
     
    
 
-    public static void DisplaySelection(int currentSelected){
+    public static void DisplaySelection(int currentSelected){ // ! ---
 
         ClearConsole();
 
@@ -138,8 +138,8 @@ public class QuizMainFunction extends Quiz_Console_Base {
         for(QuizActivity quiz : quiz_collection.quizCollection){
             System.out.println(
 
-              currentSelected == count? BRIGHT_YELLOW + ">> [" + count + "]" + quiz.getQuizName() + ">>  " + quiz.getQuizSubjeString() + " <<" + RESET:
-                                         "[" + count + "]" + quiz.getQuizName() + ">>  " + quiz.getQuizSubjeString() 
+              currentSelected == count? BRIGHT_YELLOW + ">> [" + count + "]" + quiz.getQuizName() + ">>  " + quiz.getQuizSubject() + " <<" + RESET:
+                                         "[" + count + "]" + quiz.getQuizName() + ">>  " + quiz.getQuizSubject() 
             );
             count++;
         }
@@ -147,7 +147,7 @@ public class QuizMainFunction extends Quiz_Console_Base {
     }
 
     // Display all scores and the overall average of scores in all quizes
-    public static void DisplayScoresAndStats(){
+    public static void DisplayScoresAndStats(){ // ! ---
 
         ClearConsole();
 
@@ -159,18 +159,10 @@ public class QuizMainFunction extends Quiz_Console_Base {
 
         for(QuizActivity a : quiz_collection.quizCollection){
 
-            int total_score =0;
+            int total_score = a.getScores();
             int AVG = 0;
             
-            for (Quiz_model b : a.question_collection){
-
-                if(b.GetQuestionState() == true){
-                    total_score++;
-                }
-            }
-
-            AVG = total_score/a.question_collection.size();
-
+            AVG = total_score/a.question_collection.size() * 100;
 
             // Pass data
             scoreCollection.add(total_score);
@@ -178,7 +170,7 @@ public class QuizMainFunction extends Quiz_Console_Base {
 
             // Display data here
 
-            System.out.println(ORANGE + "---|| "+ RESET + a.getQuizName() + ORANGE+ " ||-------|| " + RESET + a.getQuizSubjeString() + ORANGE + " ||-------||  " + RESET+  total_score + ORANGE+ " ||-------||  " + RESET + AVG + " ||---"  );
+            System.out.println(ORANGE + "---||" + BLUE+ " Name "+ RESET + a.getQuizName() + ORANGE+ " ||-------||" + BLUE +" Subject:  " + RESET + a.getQuizSubject() + ORANGE + " ||-------|| "+BLUE+ " Score:   " + RESET+  total_score + ORANGE+ " ||-------|| " +BLUE+"Average:   " + RESET + AVG +"%" + RED + " ||---" + RESET );
 
 
 
@@ -199,7 +191,7 @@ public class QuizMainFunction extends Quiz_Console_Base {
 
 
     // Main panel for activity
-    public static void CreateModifyQuiz(){
+    public static void CreateModifyQuiz(){ // ! --
 
         // Call the selection method from the base class 
         int selection = Selection(
@@ -220,7 +212,7 @@ public class QuizMainFunction extends Quiz_Console_Base {
         }
     }
 
-    private static void CreateQuiz(){
+    private static void CreateQuiz(){ // ! --
 
         boolean isAdding = true;
 
@@ -255,7 +247,7 @@ public class QuizMainFunction extends Quiz_Console_Base {
         }
     }
 
-    private static void Create_MultipleChoice(){
+    private static void Create_MultipleChoice(){ // !--
 
         // Create the instance 
         QuizActivity MC =  new QuizActivity();
@@ -272,7 +264,7 @@ public class QuizMainFunction extends Quiz_Console_Base {
 
           // Reader for quiz name
           System.out.print(ORANGE);
-          MC.setQuizName(SCN.next().trim());
+          MC.setQuizName(SCN.next());
           System.out.println(RESET);
 
           SCN.nextLine(); // Takes the extra line
@@ -283,7 +275,7 @@ public class QuizMainFunction extends Quiz_Console_Base {
 
           // Reead the subject string
           System.out.print(ORANGE);
-          MC.setQuizSubj(SCN.next().trim());
+          MC.setQuizSubject(SCN.next());
           System.out.println(RESET);
 
           // Set the type
@@ -312,7 +304,7 @@ public class QuizMainFunction extends Quiz_Console_Base {
 
             ORANGE + 
                 "      Name: " + MC.getQuizName() + "\n" +
-                "      Subject: " + MC.getQuizSubjeString() + "\n" +
+                "      Subject: " + MC.getQuizSubject() + "\n" +
                 "      Type: " + MC.getType() + "\n" +
                 "      Number of Questions: " + MC.question_collection.size() + "\n" + RESET
             );
@@ -329,7 +321,8 @@ public class QuizMainFunction extends Quiz_Console_Base {
             // reads the question from the user input
             System.out.println(BLUE + "- - Enter your Question - - ");
             System.out.print(ORANGE +">> " + YELLOW);
-            MC_Q.setQuestion(SCN.next().trim());
+            MC_Q.setQuestion(SCN.next());
+            SCN.nextLine();
             System.out.print(RESET);
 
             SCN.nextLine();// take all trailing space
@@ -352,6 +345,7 @@ public class QuizMainFunction extends Quiz_Console_Base {
             for(int i = 0; i < 4 ; i++){
                 System.out.print(BLUE+"    > Option " +letter[i] +":"+ YELLOW);
                 choicesTemplate[i]= SCN.next();
+                SCN.nextLine();
             }
 
             // Pass the array to the object
@@ -388,7 +382,7 @@ public class QuizMainFunction extends Quiz_Console_Base {
         }
     }
 
-    private static void Create_Identification(){
+    private static void Create_Identification(){ // !--
 
         // Initialize an interface here
         // Create the instance 
@@ -406,7 +400,7 @@ public class QuizMainFunction extends Quiz_Console_Base {
 
         // Reader for quiz name
         System.out.print(ORANGE);
-        ID.setQuizName(SCN.next().trim());
+        ID.setQuizName(SCN.next());
         System.out.println(RESET);
 
         SCN.nextLine(); // Takes the extra line
@@ -417,7 +411,7 @@ public class QuizMainFunction extends Quiz_Console_Base {
 
         // Reead the subject string
         System.out.print(ORANGE);
-         ID.setQuizSubj(SCN.next().trim());
+         ID.setQuizSubject(SCN.next());
         System.out.println(RESET);
 
         // Set the type
@@ -446,7 +440,7 @@ public class QuizMainFunction extends Quiz_Console_Base {
 
                 ORANGE + 
                  "      Name: " + ID.getQuizName() + "\n" +
-                "      Subject: " + ID.getQuizSubjeString() + "\n" +
+                "      Subject: " + ID.getQuizSubject() + "\n" +
                 "      Type: " + ID.getType() + "\n" +
                  "      Number of Questions: " + ID.question_collection.size() + "\n" + RESET
             );
@@ -508,6 +502,7 @@ public class QuizMainFunction extends Quiz_Console_Base {
         }
 
     }
+
 
     private static void DeleteQuiz(){
 
