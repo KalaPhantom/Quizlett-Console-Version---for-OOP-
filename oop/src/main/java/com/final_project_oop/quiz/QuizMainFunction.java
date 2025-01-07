@@ -346,6 +346,7 @@ public class QuizMainFunction extends Quiz_Console_Base {
                 System.out.print(BLUE+"    > Option " +letter[i] +":"+ YELLOW);
                 choicesTemplate[i]= SCN.next();
                 SCN.nextLine();
+                SCN.nextLine();
             }
 
             // Pass the array to the object
@@ -403,6 +404,7 @@ public class QuizMainFunction extends Quiz_Console_Base {
         ID.setQuizName(SCN.next());
         System.out.println(RESET);
 
+
         SCN.nextLine(); // Takes the extra line
    
 
@@ -458,6 +460,7 @@ public class QuizMainFunction extends Quiz_Console_Base {
             System.out.println(BLUE + "- - Enter your Question - - ");
             System.out.print(ORANGE +">> " + YELLOW);
             ID_Q.setQuestion(SCN.next().trim());
+            SCN.nextLine();
             System.out.print(RESET);
 
             SCN.nextLine();// take all trailing space
@@ -467,6 +470,7 @@ public class QuizMainFunction extends Quiz_Console_Base {
             System.out.print(ORANGE +">> " + YELLOW);
             ID_Q.setCorrectAnswer(SCN.next());   
             System.out.println(RESET);
+            SCN.nextLine();
 
 
           
